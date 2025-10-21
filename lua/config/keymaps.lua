@@ -19,3 +19,20 @@ map("n", "\\", function()
     explorer_pickers[1]:focus()
   end
 end, { desc = "File Explorer" })
+-- Disable terminal suspend (Ctrl+Z default)
+vim.keymap.set("n", "<C-z>", "u", { noremap = true, silent = true })
+vim.keymap.set("i", "<C-z>", "<C-o>u", { noremap = true, silent = true })
+-- Start live-server as a background job
+vim.keymap.set("n", "<leader>ls", function()
+  local dir = vim.fn.expand("%:p:h")
+  vim.fn.jobstart("live-server " .. dir, {
+    detach = true,
+    on_exit = function()
+      print("Live server stopped")
+    end,
+  })
+  print("Live server started at " .. dir)
+end, { desc = "Start live server" })
+
+-- Optional: Add a stop command
+vim.keymap.set("n", "<leader>lk", ":!pkill live-server<CR>", { desc = "Kill live server" })
