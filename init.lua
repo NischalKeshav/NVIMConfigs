@@ -5,7 +5,7 @@ require("luasnip.loaders.from_vscode").lazy_load({
 })
 require("telescope").setup({
   defaults = {
-    file_ignore_patterns = { "node_modules", ".git" }, -- Add other directories as needed
+    file_ignore_patterns = { "node_modules", ".git", ".DS_Store" }, -- Add other directories as needed
   },
   -- You can also add this to specific pickers if you only want it to apply to some
   -- pickers = {
